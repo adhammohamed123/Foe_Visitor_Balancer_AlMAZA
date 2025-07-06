@@ -49,13 +49,13 @@ namespace Core.Exceptions
 		}
         public class CannotAddVisitorToAcceptedVisitBadRequestException : BadRequestException
 		{
-			public CannotAddVisitorToAcceptedVisitBadRequestException() : base($"لا يمكن اضافه زائر لهذه الزياره لانه تم الموافقة عليها من  قبل مسئولي الامن ")
+			public CannotAddVisitorToAcceptedVisitBadRequestException(string source) : base($"لا يمكن اضافه زائر لهذه  الزياره لانه تم الموافقة عليها من  قبل {source} ")
 			{
 			}
 		}
         public class CannotAddVisitorToRejectedVisitBadRequestException : BadRequestException
         {
-			public CannotAddVisitorToRejectedVisitBadRequestException() : base($"لا يمكن اضافه زائر لهذه الزياره لانه تم رفضها من قبل مسئولي الامن ") { }
+			public CannotAddVisitorToRejectedVisitBadRequestException(string source) : base($"لا يمكن اضافه زائر لهذه الزياره لانه تم رفضها من قبل  {source} ") { }
 
 		}
 

@@ -23,7 +23,7 @@ namespace Presentaion
         }
 
         [HttpGet]
-        [Authorize(Roles ="dept,nozom,police,gate")]
+        [Authorize(Roles = "dept,nozom,police,gate,secertary")]
         //[SwaggerOperation("Get all floors")]
 		public async Task<IActionResult> Get()
         {

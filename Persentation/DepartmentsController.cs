@@ -25,7 +25,7 @@ public class DepartmentsController : ControllerBase
         return Ok(response);
     }
     [HttpGet("getAll")]
-	[Authorize(Roles = "nozom")]
+	[Authorize(Roles = "nozom,secertary")]
 	public  async Task<IActionResult> GetAll()
     {
         var data = await service.DepartmentService.GetAllDepartments(trackchanges: false);

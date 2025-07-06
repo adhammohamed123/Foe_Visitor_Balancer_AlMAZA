@@ -61,14 +61,25 @@ namespace Presentaion
        //[SwaggerOperation("retrive all visits for police dept")]
         public IActionResult GetAllVisits([FromQuery]VisitRequestParameters visitRequestParameters )
         {
+            visitRequestParameters.VisitStateFromDept = Core.Entities.Enum.VisitState.Approved; // police get only approved dept visits and then make 
             var pagedResult = service.VisitService.GetAllVisits(visitRequestParameters,false);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
             var response = new ResponseShape<VisitForReturnDto>(StatusCodes.Status200OK, "ok", null, pagedResult.visitForReturnDtos.ToList());
 
             return Ok(response);
         }
-       
-        
+        [Authorize(Roles = "secertary,nozom")]
+        [HttpGet("GetAllVisitsCreatedBySecertary")]
+        public IActionResult GetAllVisitsCreatedBySecertary([FromQuery] VisitRequestParameters visitRequestParameters)
+        {
+            visitRequestParameters.IsCreatedByDept = false;
+            var pagedResult = service.VisitService.GetAllVisits(visitRequestParameters, false);
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
+            var response = new ResponseShape<VisitForReturnDto>(StatusCodes.Status200OK, "ok", null, pagedResult.visitForReturnDtos.ToList());
+
+            return Ok(response);
+        }
+
         [Authorize(Roles ="gate,nozom")]
         [HttpGet("getAllVisitsToday")]
        // [SwaggerOperation("retrive all accepted visits for today this for gate man")]

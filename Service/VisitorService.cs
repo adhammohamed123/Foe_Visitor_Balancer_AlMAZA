@@ -46,11 +46,22 @@ namespace Service.Services
             var visit=await CheckVisitExistance(VisitId, trackchanges);
             if(visit.VisitStateFromPolice == VisitState.Approved)
 			{
-				throw new CannotAddVisitorToAcceptedVisitBadRequestException();
+				throw new CannotAddVisitorToAcceptedVisitBadRequestException("مسئولي الامن");
 			}else if(visit.VisitStateFromPolice == VisitState.Rejected)
 			{
-				throw new CannotAddVisitorToRejectedVisitBadRequestException();
+				throw new CannotAddVisitorToRejectedVisitBadRequestException("مسئولي الامن");
 			}
+            if(visit.CreatedUserId != userId) // secertary is now try to add new visitor 
+            {
+                if (visit.VisitStateFromDept == VisitState.Approved)
+                {
+                    throw new CannotAddVisitorToAcceptedVisitBadRequestException("مسئولي الاداره");
+                }
+                else if (visit.VisitStateFromDept == VisitState.Rejected)
+                {
+                    throw new CannotAddVisitorToRejectedVisitBadRequestException("مسئولي الاداره");
+                }
+            }
 			var visitor= mapper.Map<Visitor>(forCreationDto);
             visitor.CreatedUserId = userId;
             if (repositoryManager.BlackListRepo.CheckIfVisitorExistsInBlackList(visitor.NID))

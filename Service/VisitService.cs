@@ -58,7 +58,7 @@ namespace Service.Services
             var visits= mapper.Map<IEnumerable<VisitForReturnDto>>(data);
             return(visits, data.metaData);
         }
-
+     
 
         public (IEnumerable<VisitForReturnDto> visitForReturnDtos, MetaData metaData) GetVisitsForUser(VisitRequestParameters visitRequestParameters,string UserId, bool trackchanges)
         {

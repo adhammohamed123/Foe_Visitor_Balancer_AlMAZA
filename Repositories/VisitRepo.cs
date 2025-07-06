@@ -33,7 +33,7 @@ namespace Repository
              .Include(v => v.Visitors)
              .filter(visitRequestParameters.FloarId, 
              visitRequestParameters.VisitStateFromPolice,
-             visitStateFromDept: Core.Entities.Enum.VisitState.Approved
+             visitStateFromDept:visitRequestParameters.VisitStateFromDept
              ,visitRequestParameters.VisitType,
              visitRequestParameters.IsCreatedByDept)
              .Search(visitRequestParameters.SearchTerm)
@@ -45,7 +45,7 @@ namespace Repository
         {
             var today = DateTime.UtcNow.Date;
             var data = FindByCondition(v => v.VisitDate >= today && v.VisitDate < today.AddDays(1), false)
-                     .Include(v => v.Visitors.Where(visitor => visitor.CardId != null))
+                     .Include(v => v.Visitors)
                     .filter(visitRequestParameters.FloarId, 
                     visitStateFromPolice: Core.Entities.Enum.VisitState.Approved,
                     visitStateFromDept: null,
