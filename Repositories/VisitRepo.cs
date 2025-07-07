@@ -44,8 +44,8 @@ namespace Repository
         public PagedList<Visit> GetAllVisitsInThisDay(VisitRequestParameters visitRequestParameters)
         {
             var today = DateTime.UtcNow.Date;
-            var data = FindByCondition(v => v.VisitDate >= today && v.VisitDate < today.AddDays(1), false)
-                     .Include(v => v.Visitors)
+            var data = FindByCondition(v => v.VisitDate >= today && v.VisitDate < today.AddDays(1) , false)
+                     .Include(v => v.Visitors.Where(v=>v.CardId!=null || (v.CardId==null && v.IsBloacked==true)))
                     .filter(visitRequestParameters.FloarId, 
                     visitStateFromPolice: Core.Entities.Enum.VisitState.Approved,
                     visitStateFromDept: null,

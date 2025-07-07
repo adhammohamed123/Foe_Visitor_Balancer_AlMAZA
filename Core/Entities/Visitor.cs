@@ -14,6 +14,7 @@ namespace Core.Entities
 		public bool IsBloacked { get; set; }
 		public VisitorIdentifierType VisitorIdentifierType { get; set; }
 		//public ICollection<VisitorInVisit> InVisits {  get; set; }
+		
 		#region Error In Mapping one to Many
 		public DateTime? EntryTime { get; set; }
 		public DateTime? LeaveTime { get; set; }
@@ -28,6 +29,7 @@ namespace Core.Entities
 		#endregion
 
 	}
+	
 	//public class VisitorInVisit:ISoftDeletedModel
 	//{
 	//	[ForeignKey(nameof(Visit))]
