@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Visitor.Migrations
 {
     /// <inheritdoc />
-    public partial class unarrangedvisit : Migration
+    public partial class allInOne : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,6 +47,8 @@ namespace Visitor.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     VisitorIdentifierNIDorPassportNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VisitorIdentifierType = table.Column<byte>(type: "tinyint", nullable: false),
+                    ReasonForBlocking = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -377,7 +379,7 @@ namespace Visitor.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "DepartmentId", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Id", "IsDeleted", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "11111111-1111-1111-1111-111111111111", 0, "60cd41e7-92ae-488b-9b80-7f985ab44f67", "adhammo909@gmail.com", false, "11111111-1111-1111-1111-111111111111", false, false, null, null, "ADMIN", "AQAAAAIAAYagAAAAEBkcsQZJ5SFRF+s3F1qBIMUiWR2lMd2DCjiJv8DYA5YrvMeEuEnGPBIURZIAZktsGA==", null, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "a5939fb5-dffb-42ed-a656-7cb9d4f7e221", false, "Admin" });
+                values: new object[] { "11111111-1111-1111-1111-111111111111", 0, "7429720d-b3e0-482f-85a7-90226aef7979", "adhammo909@gmail.com", false, "11111111-1111-1111-1111-111111111111", false, false, null, null, "ADMIN", "AQAAAAIAAYagAAAAEBt3H8p5EK4LU/zRMGzEqlSzZa08NMX4XSEJKd5fThG3lAH4ezLyEmPItSvv633ejQ==", null, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ad11174f-ef8e-45a8-b08a-7822c3b701dd", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

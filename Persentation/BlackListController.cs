@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Core.Features;
 using System.Text.Json;
 using Service.DTOs.BlackListDtos;
+using Presentaion.Attributes;
 
 namespace Presentaion
 {
@@ -20,9 +21,10 @@ namespace Presentaion
 		}
 		[HttpPost("BlockVisitor")]
 		[Authorize(Roles = "police,nozom")]
-		public async Task<IActionResult> Block([FromBody] string NIdOrPassportNum)
+		[ServiceFilter(typeof(ValidationFilterAttribute))]
+		public async Task<IActionResult> Block([FromBody] VisitorBlockedForCreationDto visitorBlockedForCreationDto)
 		{
-			var  data=	await service.VisitorBlackListService.AddVisitorToBlackList(NIdOrPassportNum);
+			var  data=	await service.VisitorBlackListService.AddVisitorToBlackList(visitorBlockedForCreationDto);
 			var response = new ResponseShape<VisitorBlockedDto>(StatusCodes.Status200OK, "تم حظر هذا الزائر بنجاح", null, new List<VisitorBlockedDto> { data });
 			
 			return Ok(response);

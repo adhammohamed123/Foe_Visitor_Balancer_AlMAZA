@@ -6,8 +6,9 @@ namespace Service.Service
 	public interface IVisitorBlackListService
 	{
 		bool CheckIfVisitorExistsInBlackList(string NID);
-		Task<VisitorBlockedDto> AddVisitorToBlackList(string NID);
-		Task RemoveVisitorFromBlackList(int Id);
+		Task<VisitorBlockedDto> AddVisitorToBlackList(VisitorBlockedForCreationDto visitorBlockedForCreationDto);
+
+        Task RemoveVisitorFromBlackList(int Id);
 		Task<(IEnumerable<VisitorBlockedDto> BlackList, MetaData metaData)> GetAllVisitorsInBlackList(VisitorBlackListRequestParameters visitorBlackListRequestParameters, bool trackchanges);
 
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Contracts;
+using Core.Entities;
 using Core.Exceptions;
 using Core.Features;
 using Core.RepositoryContracts;
@@ -22,21 +23,24 @@ namespace Service
 			this.logger = logger;
 		}
 
-		public async Task<VisitorBlockedDto> AddVisitorToBlackList(string NID)
+		public async Task<VisitorBlockedDto> AddVisitorToBlackList(VisitorBlockedForCreationDto visitorBlockedForCreationDto)
 		{
-			if (repositoryManager.BlackListRepo.CheckIfVisitorExistsInBlackList(NID))
+			if (repositoryManager.BlackListRepo.CheckIfVisitorExistsInBlackList(visitorBlockedForCreationDto.VisitorIdentifierNIDorPassportNumber))
 			{
-				throw new VisitorAlreadyBlockedBadRequestException(NID);
+				throw new VisitorAlreadyBlockedBadRequestException(visitorBlockedForCreationDto.VisitorIdentifierNIDorPassportNumber);
 				//var blocked =await repositoryManager.BlackListRepo.GetVisitorBlackListByNID(NID,false);
 				//return mapper.Map<VisitorBlockedDto>(blocked);
 			}
-			var BlockedVisitor = new Core.Entities.VisitorBlackList
-			{
-				VisitorIdentifierNIDorPassportNumber = NID,
-			};
+			var BlockedVisitor = mapper.Map<VisitorBlackList>(visitorBlockedForCreationDto);
 			await repositoryManager.BlackListRepo.CreateVisitorBlackList(BlockedVisitor);
-			var visitorInstances = await repositoryManager.VisitorRepo.GetVisitorInstancesByNID(NID, true);
+			var visitorInstances = await repositoryManager.VisitorRepo.GetVisitorInstancesByNID(visitorBlockedForCreationDto.VisitorIdentifierNIDorPassportNumber, true);
+			//repositoryManager.VisitorRepo.BlockAndUnBlockVisitorInAllInstancesusingSql(visitorBlockedForCreationDto.VisitorIdentifierNIDorPassportNumber,isBlocked:true);
+
 			var lastVisitorRecord= visitorInstances.Where(v=>v.EntryTime==null);
+
+			//var lastVisitorRecord=await repositoryManager.VisitorRepo.GetLatestVisitorRecordByNid(visitorBlockedForCreationDto.VisitorIdentifierNIDorPassportNumber,true);
+			
+			
 			foreach (var lR in lastVisitorRecord) {
 			
 				if (lR.CardId!=null)
@@ -79,6 +83,8 @@ namespace Service
 			{
 				repositoryManager.VisitorRepo.UnBlockVisitor(visitor);
 			}
+
+			//repositoryManager.VisitorRepo.BlockAndUnBlockVisitorInAllInstancesusingSql(blockedEntity.VisitorIdentifierNIDorPassportNumber, isBlocked: false);
 		    repositoryManager.BlackListRepo.DeleteVisitorFromBlackList(blockedEntity);
 			await repositoryManager.SaveAsync();
 		}

@@ -10,7 +10,7 @@ namespace Repository
 	{
 		public CardRepo(FoeVisitContext context) : base(context)
 		{
-
+			
 		}
 
 		public void CheckInCardForVisit(Card card)

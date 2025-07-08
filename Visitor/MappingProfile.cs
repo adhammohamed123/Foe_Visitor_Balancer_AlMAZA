@@ -9,6 +9,7 @@ using Service.DTOs.FloorDtos;
 using Service.DTOs.UserDtos;
 using Service.DTOs.Visit;
 using Service.DTOs.Visitor;
+using System.Data;
 
 public class MappingProfile : Profile
 {
@@ -50,7 +51,11 @@ public class MappingProfile : Profile
         CreateMap<Core.Entities.Visitor, VisitorForReturnDto>();
         //  CreateMap<VisitorForUpdatingEntryLeaveTimeDto, Core.Entities.Visitor>();
         #endregion
+
+        CreateMap<VisitorBlockedForCreationDto, VisitorBlackList>();
+    
         CreateMap<VisitorBlackList, VisitorBlockedDto>();
+           
 
     }
 }

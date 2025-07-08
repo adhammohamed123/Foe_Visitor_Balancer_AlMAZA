@@ -231,17 +231,17 @@ namespace Visitor.Migrations
                         {
                             DepartmentId = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "60cd41e7-92ae-488b-9b80-7f985ab44f67",
+                            ConcurrencyStamp = "7429720d-b3e0-482f-85a7-90226aef7979",
                             Email = "adhammo909@gmail.com",
                             EmailConfirmed = false,
                             Id = "11111111-1111-1111-1111-111111111111",
                             IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBkcsQZJ5SFRF+s3F1qBIMUiWR2lMd2DCjiJv8DYA5YrvMeEuEnGPBIURZIAZktsGA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBt3H8p5EK4LU/zRMGzEqlSzZa08NMX4XSEJKd5fThG3lAH4ezLyEmPItSvv633ejQ==",
                             PhoneNumberConfirmed = false,
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "a5939fb5-dffb-42ed-a656-7cb9d4f7e221",
+                            SecurityStamp = "ad11174f-ef8e-45a8-b08a-7822c3b701dd",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -399,9 +399,16 @@ namespace Visitor.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ReasonForBlocking")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("VisitorIdentifierNIDorPassportNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("VisitorIdentifierType")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 

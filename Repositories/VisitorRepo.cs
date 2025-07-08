@@ -49,5 +49,11 @@ namespace Repository
 
 		public void UnBlockVisitor(Visitor visitor)
 		=>visitor.IsBloacked = false;
-	}
+
+        //public void BlockAndUnBlockVisitorInAllInstancesusingSql(string nid,bool isBlocked)
+        //=> context.Database.ExecuteSqlInterpolated($"update [dbo].[Visitors] set IsBloacked={isBlocked} where NID='{nid}'");
+
+        //public async Task<IEnumerable<Visitor>> GetLatestVisitorRecordByNid(string nid, bool trackchanges)
+        //=> await FindByCondition(v => v.NID.Equals(nid) && v.EntryTime == null,trackchanges).ToListAsync();
+    }
 }

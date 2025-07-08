@@ -64,18 +64,18 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 builder.Services.AddEndpointsApiExplorer();
 // Add response compression services
-builder.Services.AddResponseCompression(options =>
-{
-    //  options.EnableForHttps = true;
-    options.Providers.Add<GzipCompressionProvider>();
-    // options.Providers.Add<BrotliCompressionProvider>(); // Optional
-});
+//builder.Services.AddResponseCompression(options =>
+//{
+//    //  options.EnableForHttps = true;
+//    options.Providers.Add<GzipCompressionProvider>();
+//    // options.Providers.Add<BrotliCompressionProvider>(); // Optional
+//});
 
 // Configure compression level (optional)
-builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-{
-    options.Level = System.IO.Compression.CompressionLevel.Fastest; // Or Optimal
-});
+//builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+//{
+//    options.Level = System.IO.Compression.CompressionLevel.Fastest; // Or Optimal
+//});
 
 
 builder.Services.AddSwaggerGen(s =>
@@ -108,9 +108,9 @@ builder.Services.AddSwaggerGen(s =>
         });
 });
 
-//builder.WebHost.UseUrls("http://*:5555", "http://0.0.0.0:5555");
+builder.WebHost.UseUrls("http://*:5555", "http://0.0.0.0:5555");
 var app = builder.Build();
-app.UseResponseCompression();
+//app.UseResponseCompression();
 //.UseDirectoryBrowser();
 app.HandleExceptions();
 app.UseStaticFiles();

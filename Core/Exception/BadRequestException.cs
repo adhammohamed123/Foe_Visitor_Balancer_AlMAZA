@@ -98,6 +98,14 @@ namespace Core.Exceptions
             }
         }
 
+        public class CannotUpdateVisitStateAfterPoliceTakeActionBadRequestException : BadRequestException
+        {
+            public CannotUpdateVisitStateAfterPoliceTakeActionBadRequestException() : base("لا يمكن تعديل حاله الزياره لانه تم اخذ اجراء من قبل اداره الامن")
+            {
+            }
+        }
+
+
 
 
     }

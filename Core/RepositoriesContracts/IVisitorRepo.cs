@@ -13,9 +13,12 @@ namespace Core.RepositoriesContracts
         void RegisterLeaveTime(Visitor visitor);
 		/// visitor BlackList
 		Task<IEnumerable<Visitor>> GetVisitorInstancesByNID(string NID, bool trackChanges);
-        void BlockVisitor(Visitor visitor);
+        void BlockVisitor(Visitor visitor);// old version
 		void UnBlockVisitor(Visitor visitor);
-
+      //  void BlockAndUnBlockVisitorInAllInstancesusingSql(string nid, bool isBlocked);//new version
+        //Task<IEnumerable<Visitor>> GetLatestVisitorRecordByNid(string nid, bool trackchanges );
+        
+        
 	}
 
     //public interface IVisitorInVisitRepo

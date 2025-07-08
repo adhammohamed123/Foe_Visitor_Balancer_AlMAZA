@@ -93,9 +93,12 @@ namespace Service.Services
 
         public async Task<VisitForReturnDto> UpdateVisitStatusFromDept(VisitStatusChangeFromDeptDto visitStatusChangeDto)
         {
+
             var visit = await repositoryManager.VisitRepo.GetVisitById(visitStatusChangeDto.Id, true);
             if (visit == null)
                 throw new VisitNotFoundException(visitStatusChangeDto.Id);
+            if(visit.VisitStateFromPolice != Core.Entities.Enum.VisitState.Pending)
+                throw new CannotUpdateVisitStateAfterPoliceTakeActionBadRequestException();
             mapper.Map(visitStatusChangeDto, visit);
             await repositoryManager.SaveAsync();
             return mapper.Map<VisitForReturnDto>(visit);

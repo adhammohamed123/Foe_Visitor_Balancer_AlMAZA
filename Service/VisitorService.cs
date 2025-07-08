@@ -30,12 +30,14 @@ namespace Service.Services
             if(visitor.IsBloacked)
                 throw new VisitorBlockedBadRequsetException(visitor.NID);
 			var card = await CheckCardExistanceAndAvailable(visitorTakeCardInSpecifecVisitDto.CardId, true);
-			if (visitor.CardId != card.Id && visitor.CardId != null)
+			
+            if (visitor.CardId != card.Id && visitor.CardId != null)
             {
                 var oldCard = await CheckCardExistance(visitor.CardId, true);
                 oldCard.CardStatus = CardState.Available;
 			}
-		    repositoryManager.VisitorRepo.AssignCardToVisitor(visitor, card.Id);
+		    
+            repositoryManager.VisitorRepo.AssignCardToVisitor(visitor, card.Id);
             repositoryManager.CardRepo.CheckInCardForVisit(card);
             await repositoryManager.SaveAsync();
 			return mapper.Map<VisitorForReturnDto>(visitor);
