@@ -29,7 +29,7 @@ namespace Repository
 		  => FindByCondition(c => c.CardNumber.ToLower().Equals(cardNumber.ToLower().Trim()) && c.FloorId == floorId, false).Any();
 
 		public IQueryable<Card> GetAllCardsAvalibaleInFloor(long floorId, DateTime In, bool trackchanges)
-		=> FindByCondition(c => c.FloorId.Equals(floorId) && c.ReservedIn.Date!=In.Date /*c.CardStatus == Core.Entities.Enum.CardState.Available*/, trackchanges);
+		=> FindByCondition(c => c.FloorId.Equals(floorId) && c.CardStatus == Core.Entities.Enum.CardState.Available, trackchanges);
 
 		public IQueryable<Card> GetAllCardsInFloor(long floorId, bool trackchanges)
 		  => FindByCondition(c => c.FloorId.Equals(floorId), trackchanges);

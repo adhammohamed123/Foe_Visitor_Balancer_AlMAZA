@@ -41,7 +41,7 @@ public class MappingProfile : Profile
         #region Visit Model
         CreateMap<VisitForCreationDto, Visit>();
         CreateMap<VisitForCreationFromSecertaryDto, Visit>();
-        CreateMap<Visit, VisitForReturnDto>();
+        CreateMap<Visit, VisitForReturnDto>().ForMember(v=>v.DeptName,opt=>opt.MapFrom(s=>s.CreatedUser.Department.Name)) ;
         CreateMap<VisitStatusChangeFromPoliceDto, Visit>();
         CreateMap<VisitStatusChangeFromDeptDto, Visit>();
         #endregion

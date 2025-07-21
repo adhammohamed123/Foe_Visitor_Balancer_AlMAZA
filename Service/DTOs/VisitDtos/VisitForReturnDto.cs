@@ -19,6 +19,7 @@ namespace Service.DTOs.Visit
         public VisitType VisitType { get; set; }
 		public string? ReasonforRejection { get; set; }
 		public int FloorId { get; set; }
-        public ICollection<VisitorForReturnDto> Visitors { get; set; }
+		public string DeptName { get; set; }
+		public ICollection<VisitorForReturnDto> Visitors { get; set; }
     }
 }

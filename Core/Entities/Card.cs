@@ -12,8 +12,8 @@ namespace Core.Entities
         [StringLength(100)]
         public string? CardNumber { get; set; }
 
-        public DateTime ReservedIn { get; set; }
-        // public CardState CardStatus { get; set; }
+       // public DateTime ReservedIn { get; set; }
+         public CardState CardStatus { get; set; }
 
         [ForeignKey(nameof(Floor))]
         public long FloorId { get; set; }

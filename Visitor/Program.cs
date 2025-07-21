@@ -1,18 +1,13 @@
 using Core.Entities.Response;
+using FOE.Maintainance.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using NLog;
+using Persentation;
 using Presentaion.Attributes;
 using System.Text.Json.Serialization;
-using Presentaion;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using FOE.Maintainance.Extensions;
-using Persentation;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore;
-using Repositories;
-using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
