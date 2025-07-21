@@ -4,7 +4,7 @@ namespace Service.Service
 {
     public interface ICardService
     {
-        Task<IEnumerable<CardForReturnDto>> GetCardsAvaliableAsync(GetFloorCardsInDto getFloorCardsInDto/*, long floorId*/,bool trackchanges);
+        Task<IEnumerable<CardForReturnDto>> GetCardsAvaliableAsync(/*GetFloorCardsInDto getFloorCardsInDto*/ long floorId,bool trackchanges);
         Task<IEnumerable<CardForReturnDto>> GetAllCardsInFloor(long floorId, bool trackchanges);
 		Task<CardForReturnDto> GetCardById(long Id, bool trackChanges);
 		Task<CardForReturnDto> CreateCard(CardForCreationDto cardForCreationDto,long floorId ,string userId);

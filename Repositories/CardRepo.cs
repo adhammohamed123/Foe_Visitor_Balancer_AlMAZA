@@ -28,7 +28,7 @@ namespace Repository
 		public bool ChackExistanceDeptWithTheSameNumberInSameFloor(string cardNumber, long floorId)
 		  => FindByCondition(c => c.CardNumber.ToLower().Equals(cardNumber.ToLower().Trim()) && c.FloorId == floorId, false).Any();
 
-		public IQueryable<Card> GetAllCardsAvalibaleInFloor(long floorId, DateTime In, bool trackchanges)
+		public IQueryable<Card> GetAllCardsAvalibaleInFloor(long floorId/*, DateTime In,*/, bool trackchanges)
 		=> FindByCondition(c => c.FloorId.Equals(floorId) && c.CardStatus == Core.Entities.Enum.CardState.Available, trackchanges);
 
 		public IQueryable<Card> GetAllCardsInFloor(long floorId, bool trackchanges)

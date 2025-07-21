@@ -22,13 +22,14 @@ namespace Presentaion
             this.service = service;
         }
 
-        [HttpGet("getAllAvailableCardsInFloor")]///{floorId:long}
-        [Authorize(Roles ="police")]
-        //[SwaggerOperation("Get all cards for a specific floor")]
-		public async Task<IActionResult> Get(GetFloorCardsInDto getFloorCardsInDto/*, long floorId*/)
-        {
-            var data = await service.CardService.GetCardsAvaliableAsync(getFloorCardsInDto,false);
-            var response = new ResponseShape<CardForReturnDto>(StatusCodes.Status200OK, "ok", null, data.ToList());
+
+		[HttpGet("getAllAvailableCardsInFloor/{floorId:long}")]
+		[Authorize(Roles = "police")]
+		//[SwaggerOperation("Get all cards for a specific floor")]
+		public async Task<IActionResult> Get(long floorId)
+		{
+			var data = await service.CardService.GetCardsAvaliableAsync(floorId, false);
+			var response = new ResponseShape<CardForReturnDto>(StatusCodes.Status200OK, "ok", null, data.ToList());
             return Ok(response);
         }
 		[HttpGet("getAllCardsInFloor/{floorId:long}")]
