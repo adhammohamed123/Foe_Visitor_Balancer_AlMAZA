@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Visitor.Migrations
 {
     /// <inheritdoc />
-    public partial class allInOne : Migration
+    public partial class allInOneAfterAddingColorToDept : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -33,6 +33,7 @@ namespace Visitor.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(64)", maxLength: 64, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeptColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -373,13 +374,13 @@ namespace Visitor.Migrations
 
             migrationBuilder.InsertData(
                 table: "Departments",
-                columns: new[] { "Id", "IsDeleted", "Name" },
-                values: new object[] { "11111111-1111-1111-1111-111111111111", false, "nozom" });
+                columns: new[] { "Id", "DeptColor", "IsDeleted", "Name" },
+                values: new object[] { "11111111-1111-1111-1111-111111111111", "red", false, "nozom" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "DepartmentId", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Id", "IsDeleted", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "11111111-1111-1111-1111-111111111111", 0, "7429720d-b3e0-482f-85a7-90226aef7979", "adhammo909@gmail.com", false, "11111111-1111-1111-1111-111111111111", false, false, null, null, "ADMIN", "AQAAAAIAAYagAAAAEBt3H8p5EK4LU/zRMGzEqlSzZa08NMX4XSEJKd5fThG3lAH4ezLyEmPItSvv633ejQ==", null, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ad11174f-ef8e-45a8-b08a-7822c3b701dd", false, "Admin" });
+                values: new object[] { "11111111-1111-1111-1111-111111111111", 0, "1a455a5c-88e4-4d4b-ad98-02f2270cd647", "adhammo909@gmail.com", false, "11111111-1111-1111-1111-111111111111", false, false, null, null, "ADMIN", "AQAAAAIAAYagAAAAEGqErm0SjOxrFdmujRDKpx2YFiRbA0cLSpRBCpbFX83+qHxXTIdvVbTNfhW+cdLvCQ==", null, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "f88e51d5-29e1-4e54-9213-05fefb1f7eb4", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

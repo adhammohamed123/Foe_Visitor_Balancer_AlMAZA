@@ -47,6 +47,18 @@ namespace Service.Services
 			return mapper.Map<FloorForReturnDto>(floor);
         }
 
+        public async Task DeleteAsync(long id,string userId)
+        {
+            var floor =await CheckExistance(id, true);
+             repositoryManager.FloorRepo.DeleteFloor(floor,userId);
+            var cards=repositoryManager.CardRepo.GetAllCardsInFloor(id, true);
+            foreach(var card in cards)
+            {
+                repositoryManager.CardRepo.DeleteCard(card);
+            }
+            await repositoryManager.SaveAsync();
+        }
+
         public IEnumerable<FloorForReturnDto> GetAllFloor(bool trackchanges)
         {
             var data =  repositoryManager.FloorRepo.GetAllFloorList(trackchanges);

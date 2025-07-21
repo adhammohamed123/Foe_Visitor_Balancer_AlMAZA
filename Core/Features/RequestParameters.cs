@@ -31,6 +31,7 @@ namespace Core.Features
         public VisitType? VisitType { get; set; }
         public long? FloarId { get; set; }
         public string? SearchTerm { get; set; }
+        public long? CardId { get; set; }
     }
 	public class VisitorRequestParameters : RequestParameters
 	{

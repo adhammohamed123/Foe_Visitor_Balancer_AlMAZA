@@ -10,6 +10,8 @@ using Swashbuckle.AspNetCore.Annotations;
 
 namespace Presentaion
 {
+	
+
     [Route("api/Cards")]
     [ApiController]
     public class CardsController : ControllerBase
@@ -20,17 +22,17 @@ namespace Presentaion
             this.service = service;
         }
 
-        [HttpGet("getAllAvailableCardsInFloor/{floorId:long}")]
+        [HttpGet("getAllAvailableCardsInFloor")]///{floorId:long}
         [Authorize(Roles ="police")]
         //[SwaggerOperation("Get all cards for a specific floor")]
-		public async Task<IActionResult> Get(long floorId)
+		public async Task<IActionResult> Get(GetFloorCardsInDto getFloorCardsInDto/*, long floorId*/)
         {
-            var data = await service.CardService.GetCardsAvaliableAsync(floorId,false);
+            var data = await service.CardService.GetCardsAvaliableAsync(getFloorCardsInDto,false);
             var response = new ResponseShape<CardForReturnDto>(StatusCodes.Status200OK, "ok", null, data.ToList());
             return Ok(response);
         }
 		[HttpGet("getAllCardsInFloor/{floorId:long}")]
-		[Authorize(Roles = "nozom")]
+		[Authorize(Roles = "nozom,FloorSecurity")]
 		//[SwaggerOperation("Get all cards for a specific floor")]
 		public async Task<IActionResult> GetAll(long floorId)
 		{

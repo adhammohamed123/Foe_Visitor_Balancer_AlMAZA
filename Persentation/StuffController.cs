@@ -77,7 +77,7 @@ namespace Presentaion
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
             if (!await service.UserService.ValidateUser(user))
-                return Unauthorized();
+                return Unauthorized("اسم المستخدم او كلمه المرور غير صحيحه");
             var tokenDto = await service.UserService.CreateToken(populateExp: true);
             var response = new ResponseShape<TokenDto>(StatusCode: StatusCodes.Status200OK, "ok", default, new List<TokenDto>() { tokenDto });
             return Ok(response);

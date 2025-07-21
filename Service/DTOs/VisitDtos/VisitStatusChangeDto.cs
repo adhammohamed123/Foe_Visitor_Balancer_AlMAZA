@@ -7,6 +7,8 @@ namespace Service.DTOs.Visit
         public long Id { get; set; }
         public VisitState VisitStateFromPolice { get; set; }
         public string? ReasonforRejection { get; set; }
+        public bool? IsPraimaryDateAccepted { get; set; }
+
     }
     public record VisitStatusChangeFromDeptDto
     {

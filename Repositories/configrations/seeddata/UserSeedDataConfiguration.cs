@@ -38,8 +38,9 @@ namespace Repository.Extensions.Configurations.SeedData
                 new Department
                 {
                     Id = "11111111-1111-1111-1111-111111111111",
-                    Name = "nozom"
-                   
+                    Name = "nozom",
+                    DeptColor= "red"
+
                 }
             );
         }

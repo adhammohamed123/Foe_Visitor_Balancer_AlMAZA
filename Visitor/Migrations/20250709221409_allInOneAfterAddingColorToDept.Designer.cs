@@ -12,8 +12,8 @@ using Repositories;
 namespace Visitor.Migrations
 {
     [DbContext(typeof(FoeVisitContext))]
-    [Migration("20250708072322_allInOne")]
-    partial class allInOne
+    [Migration("20250709221409_allInOneAfterAddingColorToDept")]
+    partial class allInOneAfterAddingColorToDept
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,6 +82,10 @@ namespace Visitor.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<string>("DeptColor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -97,6 +101,7 @@ namespace Visitor.Migrations
                         new
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
+                            DeptColor = "red",
                             IsDeleted = false,
                             Name = "nozom"
                         });
@@ -234,17 +239,17 @@ namespace Visitor.Migrations
                         {
                             DepartmentId = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7429720d-b3e0-482f-85a7-90226aef7979",
+                            ConcurrencyStamp = "1a455a5c-88e4-4d4b-ad98-02f2270cd647",
                             Email = "adhammo909@gmail.com",
                             EmailConfirmed = false,
                             Id = "11111111-1111-1111-1111-111111111111",
                             IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBt3H8p5EK4LU/zRMGzEqlSzZa08NMX4XSEJKd5fThG3lAH4ezLyEmPItSvv633ejQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGqErm0SjOxrFdmujRDKpx2YFiRbA0cLSpRBCpbFX83+qHxXTIdvVbTNfhW+cdLvCQ==",
                             PhoneNumberConfirmed = false,
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "ad11174f-ef8e-45a8-b08a-7822c3b701dd",
+                            SecurityStamp = "f88e51d5-29e1-4e54-9213-05fefb1f7eb4",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });

@@ -26,7 +26,6 @@ namespace Presentaion
         }
         [HttpPost]
         [Authorize(Roles ="nozom,dept,police")]
-       //[SwaggerOperation("order for a new visit for loggedIn User(dept) account")]
         public async Task<IActionResult> Create([FromBody] VisitForCreationDto forCreationDto)
         {
            VisitForReturnDto data;
@@ -56,9 +55,8 @@ namespace Presentaion
         }
 
         
-        [Authorize(Roles ="police,nozom")]
+        [Authorize(Roles = "police,nozom,FloorSecurity")]
         [HttpGet("getAllVisits")]
-       //[SwaggerOperation("retrive all visits for police dept")]
         public IActionResult GetAllVisits([FromQuery]VisitRequestParameters visitRequestParameters )
         {
             visitRequestParameters.VisitStateFromDept = Core.Entities.Enum.VisitState.Approved; // police get only approved dept visits and then make 
@@ -110,7 +108,8 @@ namespace Presentaion
         [Authorize(Roles = "nozom,police")]
         public async Task<IActionResult> UpdateVisitStatus(VisitStatusChangeFromPoliceDto change)
         {
-            var data=await service.VisitService.UpdateVisitStatusFromPolice(change);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var data=await service.VisitService.UpdateVisitStatusFromPolice(change,userId);
             var response=new ResponseShape<VisitForReturnDto>(StatusCodes.Status200OK, "updated successfuly", null, new List<VisitForReturnDto>() { data });
             return Ok(response);
         }
@@ -120,7 +119,8 @@ namespace Presentaion
         [Authorize(Roles = "nozom,dept")]
         public async Task<IActionResult> UpdateVisitStatusFromdept(VisitStatusChangeFromDeptDto change)
         {
-            var data = await service.VisitService.UpdateVisitStatusFromDept(change);
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var data = await service.VisitService.UpdateVisitStatusFromDept(change,userId);
             var response = new ResponseShape<VisitForReturnDto>(StatusCodes.Status200OK, "updated successfuly", null, new List<VisitForReturnDto>() { data });
             return Ok(response);
         }

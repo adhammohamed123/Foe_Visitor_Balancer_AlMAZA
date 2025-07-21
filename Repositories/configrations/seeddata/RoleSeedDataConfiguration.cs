@@ -43,6 +43,12 @@ namespace Repository.Extensions.Configurations.SeedData
                       Id = "C0969547-A084-4839-836C-F41F4CF5D121",
                       Name = "secertary",
                       NormalizedName = "SECERTARY"
+                  },
+                  new IdentityRole
+                  {
+                      Id = "C0969547-A084-4839-836C-F41F4CF5D123",
+                      Name = "FloorSecurity",
+                      NormalizedName = "FLOORSECURITY"
                   }
                 );
         }

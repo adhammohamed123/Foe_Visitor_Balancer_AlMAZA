@@ -6,7 +6,7 @@ namespace Core.RepositoriesContracts
     {
 
 		IQueryable<Card> GetAllCardsInFloor(long floorId, bool trackchanges);
-        IQueryable<Card> GetAllCardsAvalibaleInFloor(long floorId, bool trackchanges);
+        IQueryable<Card> GetAllCardsAvalibaleInFloor(long floorId,DateTime In, bool trackchanges);
 		Task<Card> GetCardById(long Id, bool tackchanges);
 		void CheckInCardForVisit(Card card);
         Task CreateNewCard(Card card, long floorID);

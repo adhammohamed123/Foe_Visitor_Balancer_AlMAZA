@@ -4,10 +4,8 @@ using Core.Entities;
 using Core.Exceptions;
 using Core.Features;
 using Core.RepositoryContracts;
-using Microsoft.EntityFrameworkCore;
 using Service.DTOs.Visit;
 using Service.Service;
-using System.Threading.Tasks;
 using static Core.Exceptions.BadRequestException;
 namespace Service.Services
 {
@@ -31,6 +29,7 @@ namespace Service.Services
             await repositoryManager.VisitRepo.CreateNewVisit(visit,userIdFromToken);
             visit.IsCreatedByDept = true;
             visit.VisitStateFromDept = Core.Entities.Enum.VisitState.Approved;
+            visit.VisitDate = visitForCreationDto.PrimaryDate;
             await repositoryManager.SaveAsync();
             var result = await repositoryManager.VisitRepo.GetVisitDetailsWithVisitors(visit.Id, trackchanges);
             var data = mapper.Map<VisitForReturnDto>(result);
@@ -41,6 +40,7 @@ namespace Service.Services
         {
 
             var visit = mapper.Map<Visit>(visitForCreationDto);
+            visit.VisitDate=visitForCreationDto.PrimaryDate;
             await repositoryManager.VisitRepo.Create(visit);
             if(visit.CreatedUserId != userIdFromToken)
             {
@@ -74,7 +74,7 @@ namespace Service.Services
             return (visitForReturnDtos:visits,data.metaData);
         }
 
-        public async Task<VisitForReturnDto> UpdateVisitStatusFromPolice(VisitStatusChangeFromPoliceDto visitStatusChangeDto)
+        public async Task<VisitForReturnDto> UpdateVisitStatusFromPolice(VisitStatusChangeFromPoliceDto visitStatusChangeDto,string userId)
         {
             var visit=await repositoryManager.VisitRepo.GetVisitById(visitStatusChangeDto.Id,true);
             if (visit == null)
@@ -87,11 +87,27 @@ namespace Service.Services
 			 //   }
 
             mapper.Map(visitStatusChangeDto, visit);
+            if(visitStatusChangeDto.VisitStateFromPolice == Core.Entities.Enum.VisitState.Approved)
+            {
+                visit.ReasonforRejection=null;
+                if (visitStatusChangeDto.IsPraimaryDateAccepted == true)
+                {
+                    visit.VisitDate = visit.PrimaryDate;
+                }
+                else
+                {
+                    visit.VisitDate = visit.SecondaryDate ?? visit.PrimaryDate;
+                }
+
+            }else  {
+                visit.IsPraimaryDateAccepted = null;
+            }
+            visit.LastModifiedUserId = userId;
             await repositoryManager.SaveAsync();
             return mapper.Map<VisitForReturnDto>(visit);
         }
 
-        public async Task<VisitForReturnDto> UpdateVisitStatusFromDept(VisitStatusChangeFromDeptDto visitStatusChangeDto)
+        public async Task<VisitForReturnDto> UpdateVisitStatusFromDept(VisitStatusChangeFromDeptDto visitStatusChangeDto,string userId)
         {
 
             var visit = await repositoryManager.VisitRepo.GetVisitById(visitStatusChangeDto.Id, true);

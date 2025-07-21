@@ -12,7 +12,8 @@ namespace Service.DTOs.Visit
 {
     public record VisitForCreationDto
     {
-        public DateTime VisitDate { get; set; }
+        public DateTime PrimaryDate { get; set; }
+        public DateTime? SecondaryDate { get; set; }
         public string EmployeeNameInVisit { get; set; }
         public string Reason { get; set; }
 		public VisitType VisitType { get; set; }

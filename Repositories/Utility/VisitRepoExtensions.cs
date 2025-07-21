@@ -21,7 +21,7 @@ namespace Repository.Extensions
                                       d.Reason.ToLower().Contains(searchLower) ||
                                       d.Notes.ToLower().Contains(searchLower));
         }
-        public static IQueryable<Visit> filter(this IQueryable<Visit> visits, long? floorId, VisitState? visitStateFromPolice, VisitState? visitStateFromDept, VisitType? visitType,bool? isCreatedByDept)
+        public static IQueryable<Visit> filter(this IQueryable<Visit> visits, long? floorId, VisitState? visitStateFromPolice, VisitState? visitStateFromDept, VisitType? visitType,bool? isCreatedByDept, long? CardId)
         {
             if (floorId != null)
             {
@@ -30,6 +30,10 @@ namespace Repository.Extensions
             if(isCreatedByDept != null)
             {
                 visits = visits.Where(v => v.IsCreatedByDept == isCreatedByDept);
+            }
+            if (CardId != null)
+            {
+                visits = visits.Where(v => v.Visitors.Any(v => v.CardId == CardId));
             }
             switch (visitStateFromPolice)
             {

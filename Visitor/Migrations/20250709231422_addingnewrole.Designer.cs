@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories;
 
@@ -11,9 +12,11 @@ using Repositories;
 namespace Visitor.Migrations
 {
     [DbContext(typeof(FoeVisitContext))]
-    partial class FoeVisitContextModelSnapshot : ModelSnapshot
+    [Migration("20250709231422_addingnewrole")]
+    partial class addingnewrole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,17 +239,17 @@ namespace Visitor.Migrations
                         {
                             DepartmentId = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ee71a4ff-7289-4e36-9751-421c9435087e",
+                            ConcurrencyStamp = "8fa2f215-1f07-4c1e-b4e7-b0d9d3a137ab",
                             Email = "adhammo909@gmail.com",
                             EmailConfirmed = false,
                             Id = "11111111-1111-1111-1111-111111111111",
                             IsDeleted = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMTp4vpAj4BWhZTCwUQb4/78cr/t55Xy1AFYd0oZzQ9u1HQTulDbvuE51/sU2plVfA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPs7AbE2DB06J2mhYnsssHSykqJX1q45Gmgpf4DijoczMpJb6Xhak0fUIuxupRsfYA==",
                             PhoneNumberConfirmed = false,
                             RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "729d27e1-045e-4e9d-9b9f-dd081fb21532",
+                            SecurityStamp = "50f82e9c-6189-4858-9557-ac8713223b94",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         });
@@ -281,9 +284,6 @@ namespace Visitor.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsPraimaryDateAccepted")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -294,18 +294,12 @@ namespace Visitor.Migrations
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PrimaryDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Reason")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReasonforRejection")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("SecondaryDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("VisitDate")
                         .HasColumnType("datetime2");

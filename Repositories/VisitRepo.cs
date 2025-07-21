@@ -35,7 +35,7 @@ namespace Repository
              visitRequestParameters.VisitStateFromPolice,
              visitStateFromDept:visitRequestParameters.VisitStateFromDept
              ,visitRequestParameters.VisitType,
-             visitRequestParameters.IsCreatedByDept)
+             visitRequestParameters.IsCreatedByDept,visitRequestParameters.CardId)
              .Search(visitRequestParameters.SearchTerm)
              .Sort(visitRequestParameters.OrderBy)
              .ToList();
@@ -50,7 +50,7 @@ namespace Repository
                     visitStateFromPolice: Core.Entities.Enum.VisitState.Approved,
                     visitStateFromDept: null,
                     visitRequestParameters.VisitType,
-                    isCreatedByDept: null)
+                    isCreatedByDept: null,null)
                       .Search(visitRequestParameters.SearchTerm)
                       .Sort(visitRequestParameters.OrderBy)
                      .ToList();
@@ -72,7 +72,7 @@ namespace Repository
             visitStateFromPolice: visitRequestParameters.VisitStateFromPolice,
             visitStateFromDept:visitRequestParameters.VisitStateFromDept,
             visitRequestParameters.VisitType,
-            isCreatedByDept: visitRequestParameters.IsCreatedByDept)
+            isCreatedByDept: visitRequestParameters.IsCreatedByDept,null)
             .Search(visitRequestParameters.SearchTerm)
             .Sort(visitRequestParameters.OrderBy)
             .ToList();

@@ -53,10 +53,11 @@ namespace Service.Services
             var card = await CheckExistance(Id, trackChanges);
             return mapper.Map<CardForReturnDto>(card);
         }
-        public async Task<IEnumerable<CardForReturnDto>> GetCardsAvaliableAsync(long floorId, bool trackchanges)
+        public async Task<IEnumerable<CardForReturnDto>> GetCardsAvaliableAsync(GetFloorCardsInDto getFloorCardsInDto /* long floorId*/, bool trackchanges)
         {
-			await CheckParentExistance(floorId, trackchanges);
-			var avalCards = repositoryManager.CardRepo.GetAllCardsAvalibaleInFloor(floorId, trackchanges);
+			await CheckParentExistance(getFloorCardsInDto.FloorId/*, floorId*/, trackchanges);
+			var avalCards = repositoryManager.CardRepo.GetAllCardsAvalibaleInFloor(getFloorCardsInDto.FloorId,getFloorCardsInDto
+                .In/*floorId*/, trackchanges);
             return mapper.Map<IEnumerable<CardForReturnDto>>(avalCards);
         }
 

@@ -23,7 +23,7 @@ namespace Presentaion
         }
 
         [HttpGet]
-        [Authorize(Roles = "dept,nozom,police,gate,secertary")]
+        [Authorize(Roles = "dept,nozom,police,gate,secertary,FloorSecurity")]
         //[SwaggerOperation("Get all floors")]
 		public async Task<IActionResult> Get()
         {
@@ -52,6 +52,15 @@ namespace Presentaion
            var data = await service.FloorService.CreateFloor(dto,userId);
             var response= new ResponseShape<FloorForReturnDto>(StatusCodes.Status200OK, "Created Successfuly", null,new List<FloorForReturnDto>(){ data }); 
             return Ok(response);
+        }
+
+        [HttpDelete("{id:int}")]
+        [Authorize(Roles = "nozom")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            await service.FloorService.DeleteAsync(id,userId);
+            return Ok("Deleted Successfully");
         }
     }
 }

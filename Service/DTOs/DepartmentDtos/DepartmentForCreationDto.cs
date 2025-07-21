@@ -10,11 +10,13 @@ namespace Service.DTOs.DepartmentDtos
     public class DepartmentForCreationDto
     {
         public string Name { get; set; }
+        public string DeptColor { get; set; }
     }
 
     public class DepartmentForReturnDto
     {
         public string Id { get; set; }
         public string Name { get; set; }
+        public string DeptColor { get; set; }
     }
 }

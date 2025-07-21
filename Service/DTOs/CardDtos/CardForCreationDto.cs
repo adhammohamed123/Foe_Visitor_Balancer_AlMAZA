@@ -8,4 +8,9 @@ namespace Service.DTOs.CardDtos
 		public string? CardNumber { get; set; }
 
 	}
+    public record GetFloorCardsInDto
+    {
+        public long FloorId { get; set; }
+        public DateTime In { get; set; }
+    }
 }

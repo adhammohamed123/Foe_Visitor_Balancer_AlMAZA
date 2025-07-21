@@ -11,8 +11,8 @@ namespace Service.Service
        
         (IEnumerable<VisitForReturnDto> visitForReturnDtos, MetaData metaData) GetVisitsToday(VisitRequestParameters visitRequestParameters);
         (IEnumerable<VisitForReturnDto> visitForReturnDtos, MetaData metaData) GetVisitsForUser(VisitRequestParameters visitRequestParameters,string UserId, bool trackchanges);
-        Task<VisitForReturnDto> UpdateVisitStatusFromPolice(VisitStatusChangeFromPoliceDto visitStatusChangeDto);
-        Task<VisitForReturnDto> UpdateVisitStatusFromDept(VisitStatusChangeFromDeptDto visitStatusChangeDto);
+        Task<VisitForReturnDto> UpdateVisitStatusFromPolice(VisitStatusChangeFromPoliceDto visitStatusChangeDto, string userId);
+        Task<VisitForReturnDto> UpdateVisitStatusFromDept(VisitStatusChangeFromDeptDto visitStatusChangeDto, string userId);
     }
 	
 

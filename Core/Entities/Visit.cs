@@ -8,6 +8,11 @@ namespace Core.Entities
     public class Visit :FullAduitbaseModel
     {
         public DateTime VisitDate { get; set; }
+
+        public DateTime PrimaryDate { get; set; }
+        public DateTime? SecondaryDate { get; set; }
+
+        public bool? IsPraimaryDateAccepted { get; set; }
         public string EmployeeNameInVisit { get; set; }
         public string Reason{ get; set; }
         public string? Notes { get; set; }
