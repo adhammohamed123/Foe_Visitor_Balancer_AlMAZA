@@ -29,7 +29,7 @@ namespace Repository
 
         public PagedList<Visit> GetAllVisits(VisitRequestParameters visitRequestParameters, bool trackchanges)
         {
-            var data = FindAll(trackchanges)
+            var data = FindByCondition(v=>v.Visitors.Count()>0,trackchanges)
 			 .Include(v => v.Visitors).Include(v => v.CreatedUser).ThenInclude(u => u.Department).AsSplitQuery()
 			 .filter(visitRequestParameters.FloarId, 
              visitRequestParameters.VisitStateFromPolice,
