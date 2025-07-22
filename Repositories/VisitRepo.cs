@@ -46,7 +46,8 @@ namespace Repository
             var today = DateTime.UtcNow.Date;
             var data = FindByCondition(v => v.VisitDate >= today && v.VisitDate < today.AddDays(1) , false)
                      .Include(v => v.Visitors.Where(v=>v.CardId!=null || (v.CardId==null && v.IsBloacked==true)))
-                    .filter(visitRequestParameters.FloarId, 
+					 .Include(v => v.CreatedUser).ThenInclude(u => u.Department).AsSplitQuery()
+					.filter(visitRequestParameters.FloarId, 
                     visitStateFromPolice: Core.Entities.Enum.VisitState.Approved,
                     visitStateFromDept: null,
                     visitRequestParameters.VisitType,
