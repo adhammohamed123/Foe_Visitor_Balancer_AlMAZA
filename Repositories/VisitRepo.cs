@@ -30,7 +30,7 @@ namespace Repository
         public PagedList<Visit> GetAllVisits(VisitRequestParameters visitRequestParameters, bool trackchanges)
         {
             var data = FindByCondition(v=>v.Visitors.Count()>0,trackchanges)
-			 .Include(v => v.Visitors).Include(v => v.CreatedUser).ThenInclude(u => u.Department).AsSplitQuery()
+			 .Include(v => v.Visitors).ThenInclude(v=>v.Card).Include(v => v.CreatedUser).ThenInclude(u => u.Department).AsSplitQuery()
 			 .filter(visitRequestParameters.FloarId, 
              visitRequestParameters.VisitStateFromPolice,
              visitStateFromDept:visitRequestParameters.VisitStateFromDept
@@ -45,8 +45,8 @@ namespace Repository
         {
             var today = DateTime.UtcNow.Date;
             var data = FindByCondition(v => v.VisitDate >= today && v.VisitDate < today.AddDays(1) , false)
-                     .Include(v => v.Visitors.Where(v=>v.CardId!=null || (v.CardId==null && v.IsBloacked==true)))
-					 .Include(v => v.CreatedUser).ThenInclude(u => u.Department).AsSplitQuery()
+                     .Include(v => v.Visitors.Where(v=>v.CardId!=null || (v.CardId==null && v.IsBloacked==true))).ThenInclude(v => v.Card)
+                     .Include(v => v.CreatedUser).ThenInclude(u => u.Department).AsSplitQuery()
 					.filter(visitRequestParameters.FloarId, 
                     visitStateFromPolice: Core.Entities.Enum.VisitState.Approved,
                     visitStateFromDept: null,
@@ -68,7 +68,7 @@ namespace Repository
         public PagedList<Visit> GetVisitsForUser(VisitRequestParameters visitRequestParameters, string UserId, bool trackchanges)
         {
           var data=  FindByCondition(v => v.CreatedUserId.Equals(UserId), trackchanges)
-            .Include(v => v.Visitors)
+            .Include(v => v.Visitors).ThenInclude(v => v.Card)
             .filter(visitRequestParameters.FloarId, 
             visitStateFromPolice: visitRequestParameters.VisitStateFromPolice,
             visitStateFromDept:visitRequestParameters.VisitStateFromDept,

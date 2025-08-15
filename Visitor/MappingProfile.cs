@@ -48,7 +48,7 @@ public class MappingProfile : Profile
 
         #region Visitor Model
         CreateMap<VisitorForCreationDto, Core.Entities.Visitor>();
-        CreateMap<Core.Entities.Visitor, VisitorForReturnDto>();
+        CreateMap<Core.Entities.Visitor, VisitorForReturnDto>().ForMember(v=>v.CardNumber,opt=>opt.MapFrom(v => v.Card.CardNumber));
         //  CreateMap<VisitorForUpdatingEntryLeaveTimeDto, Core.Entities.Visitor>();
         #endregion
 

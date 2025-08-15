@@ -12,7 +12,8 @@
 		public string? NID_PicPath { get; set; }
 		public long? CardId { get; set; }
 		public bool IsBloacked { get; set; }
+        public string? CardNumber { get; set; }
 
-	}
+    }
    
 }
